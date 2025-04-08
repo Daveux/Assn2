@@ -32,6 +32,8 @@ class CreateRedBallEnv(gym.Env):
     def step(self, action):
         # Choose another arbitrary state.
         self.state = self.observation_space.sample()
+
+        rclpy.spin_once(self.redball)
         
         # Provide an arbitrary reward (here, a fixed reward of 1).
         reward = 1
@@ -42,7 +44,7 @@ class CreateRedBallEnv(gym.Env):
         
         # Use an empty dict for info.
         info = {}
-        print(f"Successfully connected to step \n Action taken: {action}, New state: {self.state}, Reward: {reward}")
+        #print(f"Successfully connected to step \n Action taken: {action}, New state: {self.state}, Reward: {reward}")
         return self.state, reward, terminated, truncated, info
 
     def render(self):
