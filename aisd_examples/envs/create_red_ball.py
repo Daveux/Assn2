@@ -8,13 +8,11 @@ from cv_bridge import CvBridge
 import cv2
 
 class CreateRedBallEnv(gym.Env):
-    metadata = {"render_modes": ["human"]}
 
     def __init__(self, render_mode=None):
         # Set up arbitrary discrete observation and action spaces.
         self.observation_space = spaces.Discrete(10)
         self.action_space = spaces.Discrete(5)
-        self.render_mode = render_mode
         rclpy.init()
         self.redball = RedBall()
         
