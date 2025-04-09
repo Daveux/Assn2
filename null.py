@@ -2,7 +2,8 @@ import gymnasium
 import aisd_examples  # ensure this import registers the environment
 
 # Create the environment via the Gymnasium registry.
-env = gymnasium.make("aisd_examples/CreateRedBall-v0", render_mode="human")
+#env = gymnasium.make("aisd_examples/CreateRedBall-v0", render_mode="human")
+env = gymnasium.make("aisd_examples/CreateRedBall-v0")
 observation, info = env.reset()
 
 # Run the null agent, which takes random actions for 1000 steps.
