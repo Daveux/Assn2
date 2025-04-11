@@ -51,6 +51,7 @@ class CreateRedBallEnv(gym.Env):
             rclpy.spin_once(self.redball)
         
         # Get new observation from the redball node.
+        #N.B This single value is enough to know how well-centered the ball is and what adjustments are needed for future states, this helps to satisfy the MARKOV property
         observation = self.redball.redball_position if self.redball.redball_position is not None else 320
         self.state = observation
 
