@@ -1,5 +1,5 @@
 import gymnasium
-import aisd_examples  # ensure this import registers the environment
+import aisd_examples
 
 # Create the environment via the Gymnasium registry.
 #env = gymnasium.make("aisd_examples/CreateRedBall-v0", render_mode="human")

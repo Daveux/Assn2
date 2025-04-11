@@ -1,9 +1,13 @@
+import os
+#os.environ['QT_QPA_PLATFORM'] = 'wayland'
+#os.environ['QT_QPA_PLATFORM'] = 'offscreen'
 import gymnasium
-import aisd_examples          # to ensure BlocksWorldEnv is registered
+import aisd_examples      
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import time
-import os
 
 env = gymnasium.make("aisd_examples/CreateRedBall-v0")
 
@@ -14,12 +18,19 @@ num_actions = env.action_space.n
 q_table = np.zeros((num_states, num_actions))
 
 # Original Hyperparameters
-episodes = 5     # Number of episodes
-alpha = 1.0        # Learning rate
-gamma = 0.9        # Discount factor
-epsilon = 0.1      # Exploration rate
-epsilon_plot = 0.1  
-decay = 0.1
+#episodes = 30     # Number of episodes
+#alpha = 0.6        # Learning rate
+#gamma = 0.9        # Discount factor
+#epsilon = 0.1      # Exploration rate
+#epsilon_plot = 0.1  
+#decay = 0.1
+
+episodes = 100     # Number of episodes
+alpha = 0.7        # Learning rate
+gamma = 0.95        # Discount factor
+epsilon = 1.0      # Exploration rate
+epsilon_plot = 1.0  
+decay = 0.02
 
 # Custom Hyperparameters 1
 # episodes = 100   
@@ -113,4 +124,5 @@ plt.figtext(0.85, 0.5, hyperparams, fontsize=10, ha="left", bbox={"facecolor": "
 # General title for the whole figure
 plt.suptitle("Q-Learning Performance (Original Hyperparameters)", fontsize=14, fontweight='bold')
 plt.tight_layout(rect=[0, 0, 0.8, 0.95])
-plt.show()
+#plt.show()
+plt.savefig("qlearning_performance.png")

@@ -38,7 +38,9 @@ class CreateRedBallEnv(gym.Env):
         # Convert the action (an integer 0-640) to a Twist command.
         twist = Twist()
         # Compute angular velocity: map 320 to 0 and scale to ±π/2.
-        twist.angular.z = (action - 320) / 320 * (math.pi / 2)
+        #twist.angular.z = (action - 320) / 320 * (math.pi / 2)
+        max_angle = math.pi / 4  # restrict to 45 degrees
+        twist.angular.z = (action - 320) / 320 * max_angle
         # Publish the Twist message.
         self.redball.twist_publisher.publish(twist)
 
@@ -53,7 +55,7 @@ class CreateRedBallEnv(gym.Env):
         self.state = observation
 
         # Compute reward: here, a simple function that gives higher reward when the ball is near the center.
-        reward = -abs(observation - 320)
+        reward = -abs((observation - 320)/320)
 
         # Increment the step counter.
         self.step_count += 1
@@ -136,7 +138,7 @@ class RedBall(Node):
             self.target_publisher.publish(self.br.cv2_to_imgmsg(circled_orig))
         else:
             # If no red ball is detected, default the observation to center.
-            self.get_logger().info('no ball detected')
+            #self.get_logger().info('no ball detected')
             self.redball_position = 320
 
         # Here, you would update self.create3_is_stopped based on feedback (e.g. subscribing to a stop_status topic).
